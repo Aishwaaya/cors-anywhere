@@ -64,24 +64,6 @@ textarea {
 </div>
 
 <script>
-  var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
-  function doCORSRequest(options, printResult) {
-    var x = new XMLHttpRequest();
-    x.open(options.method, cors_api_url + options.url);
-    x.onload = x.onerror = function() {
-      printResult(
-        options.method + ' ' + options.url + '\n' +
-        x.status + ' ' + x.statusText + '\n\n' +
-        (x.responseText || '')
-      );
-    };
-    if (/^POST/i.test(options.method)) {
-      x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    }
-    x.send(options.data);
-  }
-
-  // Bind event
 (function() {
     var cors_api_host = 'anonsports.herokuapp.com';
     var cors_api_url = 'https://' + cors_api_host + '/';
@@ -98,6 +80,8 @@ textarea {
         return open.apply(this, args);
     };
 })();
+  // Bind event
+
 </script>
 </body>
 </html>
