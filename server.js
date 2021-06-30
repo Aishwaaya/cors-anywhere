@@ -23,20 +23,16 @@ var cors_proxy = require('./lib/cors-anywhere');
 cors_proxy.createServer({
   originBlacklist: originBlacklist,
   originWhitelist: originWhitelist,
+  requireHeader: ['origin', 'x-requested-with'],
   checkRateLimit: checkRateLimit,
   removeHeaders: [
     'cookie',
     'cookie2',
     // Strip Heroku-specific headers
+    'x-heroku-queue-wait-time',
+    'x-heroku-queue-depth',
+    'x-heroku-dynos-in-use',
     'x-request-start',
-    'x-request-id',
-    'via',
-    'connect-time',
-    'total-route-time',
-    // Other Heroku added debug headers
-    // 'x-forwarded-for',
-    // 'x-forwarded-proto',
-    // 'x-forwarded-port',
   ],
   redirectSameOrigin: true,
   httpProxyOptions: {
@@ -46,3 +42,4 @@ cors_proxy.createServer({
 }).listen(port, host, function() {
   console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
+
